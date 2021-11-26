@@ -1,0 +1,15 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>helloRcpp</AssemblyName>
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="hello.cs" />
+  </ItemGroup>
+
+  <Target Name="Build">
+    <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
+    <Csc Sources="@(Compile)" OutputAssembly="$(OutputPath)$(AssemblyName).exe" References="@(Reference)" AdditionalLibPaths="$(AdditionalLibPaths)" Optimize="true" Platform="anycpu"/>
+  </Target>
+
+</Project>
