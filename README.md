@@ -5,9 +5,9 @@ code snippet to reproduce https://github.com/mono/mono/issues/21320
 
 - requirements:
   - Linux
-  - current mono 
+  - current mono (v6.12)
   - g++
-  - R 4.1
+  - R 4.1 and package Rcpp 
 
 
 ## using plain C++ code
