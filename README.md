@@ -10,6 +10,7 @@ code snippet to reproduce https://github.com/mono/mono/issues/21320
   - R 4.1
 
 
+## using plain C++ code
 ```
 $ make
 g++ -c main.cpp `pkg-config --cflags mono-2` -std=gnu++14 -DMONO_EMBED_CPP_MAIN -fPIC
@@ -33,7 +34,7 @@ INFO[5]: Error message:
 INFO[6]: raw file name:	hello.h
 ```
 
-
+## using Rcpp
 ```
 $ export MONO_LOG_LEVEL=debug
 $ export MONO_LOG_MASK=dll,cfg
