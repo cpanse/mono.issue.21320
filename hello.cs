@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.ExceptionServices;
-using System.Collections;
-using System.Linq;
+using System.Collections; using System.Linq;
 
 namespace RawrrEmbed
 {
@@ -29,7 +28,7 @@ namespace RawrrEmbed
       String[]rv = new String[7];
       Process currentProcess = Process.GetCurrentProcess ();
       rv[0] = System.Reflection.Assembly.GetExecutingAssembly ().CodeBase;
-      rv[1] = this.filesize;//String.Join("; ", Directory.GetFiles("."));
+      rv[1] = "file size of " + this.filename + " is " + this.filesize + " Bytes.";//String.Join("; ", Directory.GetFiles("."));
 	/*
 	System.Reflection.Assembly.
 	GetAssembly (typeof (IRawDataPlus)).Location;
@@ -82,10 +81,15 @@ namespace RawrrEmbed
       //Console.WriteLine(fullPath);
       //Console.WriteLine(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-      //          RawRr R = new RawRr();
+      RawRr R = new RawRr();
+      R.setRawFile("hello.h");
+      foreach (var msg in R.get_info()){
+         Console.WriteLine(msg);
+      }
+      R.openFile();
 
-      foreach (var f in Directory.GetFiles(".")){
-         Console.WriteLine(String.Join("; ", Directory.GetFiles(".")));
+      foreach (var msg in R.get_info()){
+         Console.WriteLine(msg);
       }
       //          }
       //          Console.WriteLine(R.get_Revision());
