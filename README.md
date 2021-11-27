@@ -55,6 +55,8 @@ Mono: DllImport attempting to load: '/usr/lib/../lib/libmono-native.so'.
 ...
 
 ```
+<img width="1234" alt="mono exception" src="https://user-images.githubusercontent.com/4901987/143675100-fb9f4e27-1aa7-4d1d-9021-f459c9d5b822.png">
+
 
 ## using Rcpp and mono v5.18 &#9989;
 ```
