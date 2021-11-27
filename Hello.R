@@ -8,7 +8,7 @@ Sys.setenv("MONO_LOG_MASK"="dll,cfg")
 
 
 
-Rcpp::sourceCpp("hello.cpp", cacheDir = "/tmp/cpanse/Hello/", showOutput=TRUE, verbose=TRUE, rebuild = TRUE)
+Rcpp::sourceCpp("hello.cpp", cacheDir = "Rcpptmp", showOutput=TRUE, verbose=TRUE, rebuild = TRUE)
 
 f <- "hello.h"
 
