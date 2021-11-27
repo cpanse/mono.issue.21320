@@ -3,6 +3,9 @@
 Sys.setenv("PKG_CPPFLAGS"="`pkg-config --cflags mono-2` -O3")
 Sys.setenv("PKG_CXXFLAGS"="`pkg-config --cflags mono-2` -O3")
 Sys.setenv("PKG_LIBS"="`pkg-config --libs mono-2`")
+Sys.setenv("MONO_LOG_LEVEL"="debug")
+Sys.setenv("MONO_LOG_MASK"="dll,cfg")
+
 
 
 Rcpp::sourceCpp("hello.cpp", cacheDir = "/tmp/cpanse/Hello/", showOutput=TRUE, verbose=TRUE, rebuild = TRUE)
