@@ -12,7 +12,7 @@ code snippet to reproduce https://github.com/mono/mono/issues/21320
 
 ## using plain C++ code
 ```
-$ make
+$ msbuild && make
 g++ -c main.cpp `pkg-config --cflags mono-2` -std=gnu++14 -DMONO_EMBED_CPP_MAIN -fPIC
 g++ -c -o hello.o hello.cpp `pkg-config --cflags mono-2` -lm -std=gnu++14 -DMONO_EMBED_CPP_MAIN -fPIC
 gcc -shared -o libhello.so hello.o `pkg-config --libs mono-2` -std=gnu++14 -DMONO_EMBED_CPP_MAIN -fPIC
