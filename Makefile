@@ -1,7 +1,7 @@
 CPPFLAGS=-std=gnu++14 -DMONO_EMBED_CPP_MAIN -fPIC
 
 run: mainlink monobuild Rcppbuild
-	export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PWD} && ./main
+	export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PWD} && export MONO_LOG_LEVEL=debug && export MONO_LOG_MASK=dll,cfg && ./main
 mainlink: libhello
 	g++ -o main main.o $(CPPFLAGS) -L`pwd` -lhello
 maincomp:
