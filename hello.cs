@@ -56,19 +56,21 @@ namespace RawrrEmbed
 
     void openFile ()
     {
-      try
+//      try
       {
 	File.Exists (this.filename);
 	FileInfo fi = new FileInfo(this.filename);  
 	this.filesize = fi.Length.ToString();
       
       }
+      /*
       catch (Exception ex)
       {
 	this.errormsg =
 	  "raw file size:\tcan not be determined catch Exception. >>" +
 	  ex.Message + "<<\n";
       }
+      */
 
     }
 
