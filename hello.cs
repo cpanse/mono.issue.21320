@@ -67,7 +67,8 @@ namespace RawrrEmbed
       {
           this.errormsg =
               "raw file size:\tcan not be determined catch Exception. \n>>" +
-              ex.Message + "<<\n";
+              ex.Message + "<<\n"+ 
+              ex.StackTrace + "<<\n";
       }
     }
 
