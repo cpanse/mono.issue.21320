@@ -1,12 +1,9 @@
 #R
-
-Sys.setenv("PKG_CPPFLAGS"="`pkg-config --cflags mono-2` -O3")
-Sys.setenv("PKG_CXXFLAGS"="`pkg-config --cflags mono-2` -O3")
-Sys.setenv("PKG_LIBS"="`pkg-config --libs mono-2`")
-Sys.setenv("MONO_LOG_LEVEL"="debug")
-Sys.setenv("MONO_LOG_MASK"="dll,cfg")
-
-
+Sys.getenv("PKG_CONFIG_PATH")
+Sys.getenv("PKG_CPPFLAGS")
+Sys.getenv("PKG_LIBS")
+Sys.getenv("MONO_LOG_LEVEL")
+Sys.getenv("MONO_LOG_MASK")
 
 Rcpp::sourceCpp("hello.cpp", cacheDir = "Rcpptmp", showOutput=TRUE, verbose=TRUE, rebuild = TRUE)
 
