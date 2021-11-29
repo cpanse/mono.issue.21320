@@ -1,0 +1,5 @@
+Rcpptmp
+*.o
+main
+*.exe
+*.so

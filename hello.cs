@@ -12,15 +12,15 @@ namespace RawrrEmbed
     string errormsg = "";
     string filesize = "";
 
-    string filename = null;
+    String filename = null;
 
-      RawRr ()
+    RawRr ()
     {
       this.filename = @"/tmp/sample.raw";
     }
 
     void setRawFile(string f){
-	    this.filename = f;
+      this.filename = f;
     }
 
     string[]get_info ()
@@ -36,8 +36,8 @@ namespace RawrrEmbed
       rv[2] = currentProcess.ToString ();
       rv[3] = "currentProcess.Id:\t" + currentProcess.Id.ToString ();
       rv[4] =
-	"PrivateMemorySize64 (KB):\t" +
-	(currentProcess.PrivateMemorySize64 / 1024).ToString ();
+          "PrivateMemorySize64 (KB):\t" +
+          (currentProcess.PrivateMemorySize64 / 1024).ToString ();
       rv[5] = "Error message:\t" + this.errormsg;
       rv[6] = "raw file name:\t" + this.filename;
       /*
@@ -56,22 +56,19 @@ namespace RawrrEmbed
 
     void openFile ()
     {
-//      try
+      try
       {
-	File.Exists (this.filename);
-	FileInfo fi = new FileInfo(this.filename);  
-	this.filesize = fi.Length.ToString();
-      
+          File.Exists (this.filename);
+          FileInfo fi = new FileInfo(this.filename);
+          this.filesize = fi.Length.ToString();
       }
-      /*
       catch (Exception ex)
       {
-	this.errormsg =
-	  "raw file size:\tcan not be determined catch Exception. >>" +
-	  ex.Message + "<<\n";
+          this.errormsg =
+              "raw file size:\tcan not be determined catch Exception. \n>>" +
+              ex.Message + "<<\n"+ 
+              ex.StackTrace + "<<\n";
       }
-      */
-
     }
 
     private static void Main (string[]args)

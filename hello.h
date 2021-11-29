@@ -24,6 +24,12 @@
 #include <Rcpp.h>
 #endif
 
+#ifdef MONO_EMBED_CPP_MAIN
+#define OUTPUT(ttt)  std::cerr << ttt << std::endl
+#else
+#define OUTPUT(ttt)  Rcpp::Rcerr << ttt << std::endl
+#endif
+
 class Rawrr
 {
   std::string rawFile = "/tmp/sample.raw";

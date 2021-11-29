@@ -17,13 +17,7 @@ Rawrr::Rawrr ()
     }
   else
     {
-#ifdef MONO_EMBED_CPP_MAIN
-      std::cerr << "File " << rawFile.c_str () << " is not good." << std::
-	endl;
-#else
-      Rcpp::Rcerr << "File " << rawFile.c_str () << " is not good." << std::
-	endl;
-#endif
+        OUTPUT("File " << rawFile.c_str () << " is not good.");
     }
   mono_config_parse (NULL);
 }
@@ -32,51 +26,33 @@ void
 Rawrr::setDomainName (std::string s)
 {
   std::string ss = "rawrrr" + s;
-#ifdef MONO_EMBED_CPP_MAIN
-  std::cerr << "DomainName=" << ss << std::endl;
-#else
-  Rcpp::Rcerr << "DomainName=" << ss << std::endl;
-#endif
+  OUTPUT("DomainName=" << ss);
   try
   {
     domain = mono_jit_init_version (ss.c_str (), "v4.0");
   } catch (const std::exception & e)
   {
-#ifdef MONO_EMBED_CPP_MAIN
-    std::cerr << "mono_jit_init_version failed." << std::endl;
-#else
-    Rcpp::Rcerr << "mono_jit_init_version failed." << std::endl;
-#endif
+      OUTPUT("mono_jit_init_version failed.");
   }
 }
 
 void
 Rawrr::setAssembly (std::string file)
 {
-#ifdef MONO_EMBED_CPP_MAIN
-  std::cout << assemblyFile << std::endl;
-#else
-  Rcpp::Rcout << assemblyFile << std::endl;
-#endif
+  OUTPUT(__LINE__);
+  OUTPUT(assemblyFile);
 
   assemblyFile = file;
 
-#ifdef MONO_EMBED_CPP_MAIN
-  std::cout << assemblyFile << std::endl;
-#else
-  Rcpp::Rcout << assemblyFile << std::endl;
-#endif
+  OUTPUT(__LINE__);
+  OUTPUT(assemblyFile);
 }
 
 void
 Rawrr::setRawFile (std::string file)
 {
   rawFile = file;
-#ifdef MONO_EMBED_CPP_MAIN
-  std::cerr << rawFile << std::endl;
-#else
-  Rcpp::Rcerr << rawFile << std::endl;
-#endif
+  OUTPUT(rawFile);
 
   //MonoString *str;
   void *args[1];
@@ -86,12 +62,7 @@ Rawrr::setRawFile (std::string file)
   mono_runtime_invoke (function_set_rawFile, obj, args, &exception);
   if (exception)
     {
-
-#ifdef MONO_EMBED_CPP_MAIN
-      std::cout << "Exception was raised in setRawFile\n";
-#else
-      Rcpp::Rcout << "Exception was raised in setRawFile\n";
-#endif
+        OUTPUT("Exception was raised in setRawFile\n");
     }
 }
 
@@ -103,11 +74,7 @@ Rawrr::createObject ()
 
   if (!assembly)
     {
-#ifdef MONO_EMBED_CPP_MAIN
-      std::cerr << "ASSEMBLY PROBLEM\n" << std::endl;
-#else
-      Rcpp::Rcerr << "ASSEMBLY PROBLEM\n" << std::endl;
-#endif
+      OUTPUT("ASSEMBLY PROBLEM\n");
       return;
     }
 
@@ -116,28 +83,17 @@ Rawrr::createObject ()
   Raw = mono_class_from_name (image, "RawrrEmbed", "RawRr");
   if (!Raw)
     {
-#ifndef MONO_EMBED_CPP_MAIN
-      Rcpp::Rcerr << "Can't find RawRr in assembly " <<
-	mono_image_get_filename (image) << std::endl;
-#endif
+      OUTPUT("Can't find RawRr in assembly " << mono_image_get_filename (image));
       return;
     }
 
-#ifndef MONO_EMBED_CPP_MAIN
-  Rcpp::Rcerr << "mono_object_new ...";
-#endif
+  OUTPUT("mono_object_new ...");
   obj = mono_object_new (domain, Raw);
-#ifndef MONO_EMBED_CPP_MAIN
-  Rcpp::Rcerr << " [DONE]" << std::endl;
-#endif
+  OUTPUT(" [DONE]");
 
-#ifndef MONO_EMBED_CPP_MAIN
-  Rcpp::Rcerr << "mono_runtime_object_init ...";
-#endif
+  OUTPUT("mono_runtime_object_init ...");
   mono_runtime_object_init (obj);
-#ifndef MONO_EMBED_CPP_MAIN
-  Rcpp::Rcerr << " [DONE]" << std::endl;
-#endif
+  OUTPUT(" [DONE]");
 
   /// browse class methods
   MonoClass *klass;
@@ -175,12 +131,7 @@ void
 Rawrr::openFile ()
 {
   MonoObject *exception;
-#ifndef MONO_EMBED_CPP_MAIN
-      Rcpp::
-	Rcerr << "OpenFile..." << std::endl;
-#else
-      std::cout<< "OpenFile..." << std::endl;
-#endif
+  OUTPUT("OpenFile...");
 
   exception = NULL;
 
@@ -188,12 +139,7 @@ Rawrr::openFile ()
 
   if (exception)
     {
-#ifndef MONO_EMBED_CPP_MAIN
-      Rcpp::
-	Rcerr << "An exception was thrown while open raw file." << std::endl;
-#else
-      std::cout<< "An exception was thrown while open raw file." << std::endl;
-#endif
+      OUTPUT("An exception was thrown while open raw file.");
     }
 }
 
@@ -210,9 +156,7 @@ Rawrr::get_info ()
 
   if (exception)
     {
-#ifndef MONO_EMBED_CPP_MAIN
-      Rcpp::Rcerr << "An exception was thrown get_info()." << std::endl;
-#endif
+      OUTPUT("An exception was thrown get_info().");
       return (-1);
     }
 
@@ -220,11 +164,7 @@ Rawrr::get_info ()
     {
       MonoString *s = mono_array_get (result, MonoString *, i);
       char *s2 = mono_string_to_utf8 (s);
-#ifdef MONO_EMBED_CPP_MAIN
-      std::cout << "INFO[" << i << "]: " << s2 << std::endl;
-#else
-      Rcpp::Rcout << "INFO[" << i << "]: " << s2 << std::endl;
-#endif
+      OUTPUT("INFO[" << i << "]: " << s2);
     }
 
   return (0);
@@ -234,10 +174,7 @@ void
 Rawrr::dector ()
 {
   mono_jit_cleanup (domain);
-#ifndef MONO_EMBED_CPP_MAIN
-  Rcpp::Rcout << "dector" << std::endl;
-#endif
-
+  OUTPUT("dector");
 }
 #endif
 
